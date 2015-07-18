@@ -49,8 +49,14 @@ class java::debian (
         before => Anchor['java::repo:']
       }
 
+      exec { 'apt-get_update':
+        command     => '/usr/bin/apt-get update',
+        refreshonly => true,
+        require     => Anchor['java::repo:']
+      }
+
       ensure_resource('package', ["oracle-${release}-${distribution}", "oracle-${release}-set-default"],
-        {'ensure' => $version, 'require' => File['/tmp/java.preseed']}
+        {'ensure' => $version, 'require' => Exec['apt-get_update']}
       )
     }
     default: {}
