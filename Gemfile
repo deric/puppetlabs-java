@@ -16,6 +16,8 @@ group :development, :unit_tests do
   gem 'simplecov',               :require => false
   gem 'puppet_facts',            :require => false
   gem 'json',                    :require => false
+  gem 'metadata-json-lint',      :require => false
+  gem 'rspec-puppet', '> 2.0'
 end
 
 group :system_tests do

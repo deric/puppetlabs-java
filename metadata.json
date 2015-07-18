@@ -1,12 +1,12 @@
 {
-  "name": "puppetlabs-java",
+  "name": "deric-java",
   "version": "1.4.1",
-  "author": "puppetlabs",
+  "author": "Tomas Barton",
   "summary": "Installs the correct Java package on various platforms.",
   "license": "Apache-2.0",
-  "source": "git://github.com/puppetlabs/puppetlabs-java",
-  "project_page": "https://github.com/puppetlabs/puppetlabs-java",
-  "issues_url": "https://tickets.puppetlabs.com/browse/MODULES",
+  "source": "git://github.com/deric/puppetlabs-java",
+  "project_page": "https://github.com/deric/puppetlabs-java",
+  "issues_url": "https://github.com/deric/puppetlabs-java/issues",
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
@@ -86,6 +86,10 @@
     }
   ],
   "dependencies": [
-    {"name":"puppetlabs/stdlib","version_requirement":">= 2.4.0 < 5.0.0"}
+    {"name":"puppetlabs/stdlib","version_requirement":">= 2.4.0 < 5.0.0"},
+    {
+      "name": "puppetlabs/apt",
+      "version_requirement": ">= 1.1.0 <= 3.0.0"
+    }
   ]
 }

@@ -42,7 +42,9 @@ class java(
   $version               = 'present',
   $package               = undef,
   $java_alternative      = undef,
-  $java_alternative_path = undef
+  $java_alternative_path = undef,
+  $source                = undef,
+  $release               = 'java8'
 ) {
   include java::params
 
@@ -88,10 +90,12 @@ class java(
   }
 
   if $::osfamily == 'Debian' {
-    # Needed for update-java-alternatives
-    package { 'java-common':
-      ensure => present,
-      before => Class['java::config'],
+    class {'java::debian':
+      package      => $package,
+      source       => $source,
+      distribution => $distribution,
+      release      => $release,
+      version      => $version,
     }
   }
 
