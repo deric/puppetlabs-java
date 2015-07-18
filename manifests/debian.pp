@@ -14,32 +14,32 @@ class java::debian (
   }
 
   anchor { 'java::repo:': }
+
   case $source {
     'webupd8team' :{
      case $::operatingsystem {
         debian: {
-          include apt
-          apt::source { 'webupd8team-java':
-            location    => 'http://ppa.launchpad.net/webupd8team/java/ubuntu',
-            release     => $::lsbdistcodename,
-            repos       => 'main',
-            key         => '7B2C3B0889BF5709A105D03AC2518248EEA14886',
-            key_server  => 'keyserver.ubuntu.com',
-            include_src => true,
-            require     => Anchor['java::repo:']
-          }
+          $dist_name = 'trusty'
         }
 
         ubuntu: {
-          include apt
-          apt::ppa { 'ppa:webupd8team/java':
-            require  => Anchor['java::repo:']
-          }
+          $dist_name = $::lsbdistcodename
         }
 
         default: {
           notice "Unsupported operatingsystem ${::operatingsystem}"
         }
+      }
+
+      include apt
+      apt::source { 'webupd8team-java':
+        location    => 'http://ppa.launchpad.net/webupd8team/java/ubuntu',
+        release     => $dist_name,
+        repos       => 'main',
+        key         => '7B2C3B0889BF5709A105D03AC2518248EEA14886',
+        key_server  => 'keyserver.ubuntu.com',
+        include_src => true,
+        require     => Anchor['java::repo:']
       }
 
       file { '/tmp/java.preseed':
