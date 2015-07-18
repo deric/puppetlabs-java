@@ -56,7 +56,7 @@ class java::debian (
       }
 
       ensure_resource('package', ["oracle-${release}-${distribution}", "oracle-${release}-set-default"],
-        {'ensure' => $version, 'require' => Exec['apt-get_update']}
+        {'ensure' => $version, 'require' => [Exec['apt-get_update'], Anchor['java::repo:']]}
       )
     }
     default: {}
